@@ -1,3 +1,7 @@
+/dataset
+/pretrained_models
+/out
+
 # default experiment tracker data
 .tracker-data/
 
