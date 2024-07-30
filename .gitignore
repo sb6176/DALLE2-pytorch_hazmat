@@ -142,3 +142,6 @@ dmypy.json
 .pyre/
 .tracker_data
 *.pth
+
+/runs
+/logs

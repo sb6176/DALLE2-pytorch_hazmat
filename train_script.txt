@@ -1,0 +1,1 @@
+torchrun --nproc_per_node 4 -m open_clip_train.main --batch-size 100 --precision amp --workers 4 --report-to tensorboard --save-frequency 1 --dataset-type csv --csv-separator="," --train-data ./dataset/captions.csv --csv-img-key filepath --csv-caption-key caption --warmup 1000 --lr=5e-6 --wd=0.1 --epochs=32 --model ViT-L-14 --pretrained ./pretrained_models/clip/ViT-L-14.pt
