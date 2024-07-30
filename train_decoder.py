@@ -614,7 +614,7 @@ def create_tracker(accelerator: Accelerator, config: TrainDecoderConfig, config_
     accelerator.wait_for_everyone()  # If nodes arrive at this point at different times they might try to autoresume the current run which makes no sense and will cause errors
     tracker: Tracker = tracker_config.create(config, accelerator_config, dummy_mode=dummy)
     tracker.save_config(config_path, config_name='decoder_config.json')
-    tracker.add_save_metadata(state_dict_key='config', metadata=config.model_dump())
+    # tracker.add_save_metadata(state_dict_key='config', metadata=config.model_dump())
     return tracker
     
 def initialize_training(config: TrainDecoderConfig, config_path):
@@ -622,7 +622,7 @@ def initialize_training(config: TrainDecoderConfig, config_path):
     torch.manual_seed(config.seed)
 
     # Set up accelerator for configurable distributed training
-    ddp_kwargs = DistributedDataParallelKwargs(find_unused_parameters=config.train.find_unused_parameters, static_graph=config.train.static_graph)
+    ddp_kwargs = DistributedDataParallelKwargs(find_unused_parameters=config.train.find_unused_parameters)
     init_kwargs = InitProcessGroupKwargs(timeout=timedelta(seconds=60*60))
     accelerator = Accelerator(kwargs_handlers=[ddp_kwargs, init_kwargs])
 
@@ -645,15 +645,15 @@ def initialize_training(config: TrainDecoderConfig, config_path):
     my_shards = all_shards[rank * shards_per_process: (rank + 1) * shards_per_process]
 
     dataloaders = create_dataloaders (
-        available_shards=my_shards,
-        img_preproc = config.data.img_preproc,
-        train_prop = config.data.splits.train,
-        val_prop = config.data.splits.val,
-        test_prop = config.data.splits.test,
-        n_sample_images=config.train.n_sample_images,
-        **config.data.model_dump(),
-        rank = rank,
-        seed = config.seed,
+        # available_shards=my_shards,
+        # img_preproc = config.data.img_preproc,
+        # train_prop = config.data.splits.train,
+        # val_prop = config.data.splits.val,
+        # test_prop = config.data.splits.test,
+        # n_sample_images=config.train.n_sample_images,
+        # **config.data.model_dump(),
+        # rank = rank,
+        # seed = config.seed,
     )
 
     # If clip is in the model, we need to remove it for compatibility with deepspeed
@@ -714,8 +714,8 @@ def initialize_training(config: TrainDecoderConfig, config_path):
         tracker=tracker,
         inference_device=accelerator.device,
         evaluate_config=config.evaluate,
-        condition_on_text_encodings=conditioning_on_text,
-        **config.train.model_dump(),
+        condition_on_text_encodings=conditioning_on_text
+        # **config.train.model_dump(),
     )
     
 # Create a simple click command line interface to load the config and start the training
