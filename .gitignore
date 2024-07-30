@@ -1,3 +1,7 @@
+/dataset
+/pretrained_models
+/out
+
 # default experiment tracker data
 .tracker-data/
 
@@ -138,3 +142,6 @@ dmypy.json
 .pyre/
 .tracker_data
 *.pth
+
+/runs
+/logs

@@ -8,7 +8,7 @@ from dalle2_pytorch.trackers import Tracker
 from dalle2_pytorch.train_configs import DecoderConfig, TrainDecoderConfig
 from dalle2_pytorch.utils import Timer, print_ribbon
 from dalle2_pytorch.dalle2_pytorch import Decoder, resize_image_to
-from clip import tokenize
+from dalle2_pytorch import OpenAIClipAdapter
 
 import torchvision
 import torch
@@ -21,6 +21,12 @@ from accelerate import Accelerator, DistributedDataParallelKwargs, InitProcessGr
 from accelerate.utils import dataclasses as accelerate_dataclasses
 import webdataset as wds
 import click
+from torch.utils.data import DataLoader, Dataset
+from PIL import Image
+import pandas as pd
+from torchvision import transforms
+
+import open_clip
 
 # constants
 
@@ -32,62 +38,122 @@ VALID_CALC_LOSS_EVERY_ITERS = 10
 def exists(val):
     return val is not None
 
+# Define your dataset class
+class ImageCaptionDataset(Dataset):
+    def __init__(self, csv_file, transform=None, batch_size=32, tokenizer=None):
+        self.data = pd.read_csv(csv_file)
+        self.transform = transform
+        self.batch_size = batch_size
+        self.tokenizer = tokenizer
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        img_path = self.data.iloc[idx, 0]
+        caption = self.data.iloc[idx, 1]
+        image = Image.open(img_path).convert('RGB')
+        if self.transform:
+            image = self.transform(image)
+        return image, self.tokenizer([str(caption)])[0]
+    
+    def get_images(self):
+        images = []
+        for idx in range(len(self)):
+            img_path = self.data.iloc[idx, 0]
+            image = Image.open(img_path).convert('RGB')
+            if self.transform:
+                image = self.transform(image)
+            images.append(image)
+        return torch.stack(images)
+    
+    def get_image_batches(self):
+        all_images = self.get_images()
+        batches = []
+        for i in range(0, len(all_images), self.batch_size):
+            batch = all_images[i:i + self.batch_size]
+            batches.append(batch)
+        return batches
+    
+
+# Define image transformations
+transform = transforms.Compose([
+    transforms.Resize((512, 512)),
+    transforms.ToTensor()
+])
+
+model_path = './logs/2024_07_19-11_27_30-model_ViT-L-14-lr_5e-06-b_100-j_4-p_amp/checkpoints/ViT-L-14.pt'
+model_name = "ViT-L-14"
+
+tokenize = open_clip.get_tokenizer(model_name)
+
 # main functions
 
 def create_dataloaders(
-    available_shards,
-    webdataset_base_url,
-    img_embeddings_url=None,
-    text_embeddings_url=None,
-    shard_width=6,
-    num_workers=4,
+    # available_shards,
+    # webdataset_base_url,
+    # img_embeddings_url=None,
+    # text_embeddings_url=None,
+    # shard_width=6,
+    num_workers=2,
     batch_size=32,
     n_sample_images=6,
     shuffle_train=True,
-    resample_train=False,
-    img_preproc = None,
-    index_width=4,
-    train_prop = 0.75,
-    val_prop = 0.15,
-    test_prop = 0.10,
-    seed = 0,
-    **kwargs
+    # resample_train=False,
+    # img_preproc = None,
+    # index_width=4,
+    # train_prop = 0.75,
+    # val_prop = 0.15,
+    # test_prop = 0.10,
+    # seed = 0,
+    # **kwargs
 ):
     """
     Randomly splits the available shards into train, val, and test sets and returns a dataloader for each
     """
-    assert train_prop + test_prop + val_prop == 1
-    num_train = round(train_prop*len(available_shards))
-    num_test = round(test_prop*len(available_shards))
-    num_val = len(available_shards) - num_train - num_test
-    assert num_train + num_test + num_val == len(available_shards), f"{num_train} + {num_test} + {num_val} = {num_train + num_test + num_val} != {len(available_shards)}"
-    train_split, test_split, val_split = torch.utils.data.random_split(available_shards, [num_train, num_test, num_val], generator=torch.Generator().manual_seed(seed))
+    # assert train_prop + test_prop + val_prop == 1
+    # num_train = round(train_prop*len(available_shards))
+    # num_test = round(test_prop*len(available_shards))
+    # num_val = len(available_shards) - num_train - num_test
+    # assert num_train + num_test + num_val == len(available_shards), f"{num_train} + {num_test} + {num_val} = {num_train + num_test + num_val} != {len(available_shards)}"
+    # train_split, test_split, val_split = torch.utils.data.random_split(available_shards, [num_train, num_test, num_val], generator=torch.Generator().manual_seed(seed))
 
-    # The shard number in the webdataset file names has a fixed width. We zero pad the shard numbers so they correspond to a filename.
-    train_urls = [webdataset_base_url.format(str(shard).zfill(shard_width)) for shard in train_split]
-    test_urls = [webdataset_base_url.format(str(shard).zfill(shard_width)) for shard in test_split]
-    val_urls = [webdataset_base_url.format(str(shard).zfill(shard_width)) for shard in val_split]
+    # # The shard number in the webdataset file names has a fixed width. We zero pad the shard numbers so they correspond to a filename.
+    # train_urls = [webdataset_base_url.format(str(shard).zfill(shard_width)) for shard in train_split]
+    # test_urls = [webdataset_base_url.format(str(shard).zfill(shard_width)) for shard in test_split]
+    # val_urls = [webdataset_base_url.format(str(shard).zfill(shard_width)) for shard in val_split]
     
-    create_dataloader = lambda tar_urls, shuffle=False, resample=False, for_sampling=False: create_image_embedding_dataloader(
-        tar_url=tar_urls,
-        num_workers=num_workers,
-        batch_size=batch_size if not for_sampling else n_sample_images,
-        img_embeddings_url=img_embeddings_url,
-        text_embeddings_url=text_embeddings_url,
-        index_width=index_width,
-        shuffle_num = None,
-        extra_keys= ["txt"],
-        shuffle_shards = shuffle,
-        resample_shards = resample, 
-        img_preproc=img_preproc,
-        handler=wds.handlers.warn_and_continue
-    )
+    # create_dataloader = lambda tar_urls, shuffle=False, resample=False, for_sampling=False: create_image_embedding_dataloader(
+    #     tar_url=tar_urls,
+    #     num_workers=num_workers,
+    #     batch_size=batch_size if not for_sampling else n_sample_images,
+    #     img_embeddings_url=img_embeddings_url,
+    #     text_embeddings_url=text_embeddings_url,
+    #     index_width=index_width,
+    #     shuffle_num = None,
+    #     extra_keys= ["txt"],
+    #     shuffle_shards = shuffle,
+    #     resample_shards = resample, 
+    #     save=img_preproc,
+    #     handler=wds.handlers.warn_and_continue
+    # )
 
-    train_dataloader = create_dataloader(train_urls, shuffle=shuffle_train, resample=resample_train)
-    train_sampling_dataloader = create_dataloader(train_urls, shuffle=False, for_sampling=True)
-    val_dataloader = create_dataloader(val_urls, shuffle=False)
-    test_dataloader = create_dataloader(test_urls, shuffle=False)
-    test_sampling_dataloader = create_dataloader(test_urls, shuffle=False, for_sampling=True)
+    # train_dataloader = create_dataloader(train_urls, shuffle=shuffle_train, resample=resample_train)
+    # train_sampling_dataloader = create_dataloader(train_urls, shuffle=False, for_sampling=True)
+    # val_dataloader = create_dataloader(val_urls, shuffle=False)
+    # test_dataloader = create_dataloader(test_urls, shuffle=False)
+    # test_sampling_dataloader = create_dataloader(test_urls, shuffle=False, for_sampling=True)
+    
+    train_dataset = ImageCaptionDataset(csv_file='./dataset/captions_train.csv', transform=transform, tokenizer=tokenize)
+    val_dataset = ImageCaptionDataset(csv_file='./dataset/captions_val.csv', transform=transform, tokenizer=tokenize)
+
+    #TODO: ADD REAL TEST CSV FILES
+    train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+    train_sampling_dataloader = DataLoader(train_dataset, batch_size=n_sample_images, shuffle=True, num_workers=num_workers)
+    val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+    test_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+    test_sampling_dataloader = DataLoader(val_dataset, batch_size=n_sample_images, shuffle=True, num_workers=num_workers)
+
     return {
         "train": train_dataloader,
         "train_sampling": train_sampling_dataloader,
@@ -286,7 +352,7 @@ def train(
     Trains a decoder on a dataset.
     """
     is_master = accelerator.process_index == 0
-
+    
     if not exists(unet_training_mask):
         # Then the unet mask should be true for all unets in the decoder
         unet_training_mask = [True] * len(decoder.unets)
@@ -548,7 +614,7 @@ def create_tracker(accelerator: Accelerator, config: TrainDecoderConfig, config_
     accelerator.wait_for_everyone()  # If nodes arrive at this point at different times they might try to autoresume the current run which makes no sense and will cause errors
     tracker: Tracker = tracker_config.create(config, accelerator_config, dummy_mode=dummy)
     tracker.save_config(config_path, config_name='decoder_config.json')
-    tracker.add_save_metadata(state_dict_key='config', metadata=config.model_dump())
+    # tracker.add_save_metadata(state_dict_key='config', metadata=config.model_dump())
     return tracker
     
 def initialize_training(config: TrainDecoderConfig, config_path):
@@ -556,7 +622,7 @@ def initialize_training(config: TrainDecoderConfig, config_path):
     torch.manual_seed(config.seed)
 
     # Set up accelerator for configurable distributed training
-    ddp_kwargs = DistributedDataParallelKwargs(find_unused_parameters=config.train.find_unused_parameters, static_graph=config.train.static_graph)
+    ddp_kwargs = DistributedDataParallelKwargs(find_unused_parameters=config.train.find_unused_parameters)
     init_kwargs = InitProcessGroupKwargs(timeout=timedelta(seconds=60*60))
     accelerator = Accelerator(kwargs_handlers=[ddp_kwargs, init_kwargs])
 
@@ -579,24 +645,37 @@ def initialize_training(config: TrainDecoderConfig, config_path):
     my_shards = all_shards[rank * shards_per_process: (rank + 1) * shards_per_process]
 
     dataloaders = create_dataloaders (
-        available_shards=my_shards,
-        img_preproc = config.data.img_preproc,
-        train_prop = config.data.splits.train,
-        val_prop = config.data.splits.val,
-        test_prop = config.data.splits.test,
-        n_sample_images=config.train.n_sample_images,
-        **config.data.model_dump(),
-        rank = rank,
-        seed = config.seed,
+        # available_shards=my_shards,
+        # img_preproc = config.data.img_preproc,
+        # train_prop = config.data.splits.train,
+        # val_prop = config.data.splits.val,
+        # test_prop = config.data.splits.test,
+        # n_sample_images=config.train.n_sample_images,
+        # **config.data.model_dump(),
+        # rank = rank,
+        # seed = config.seed,
     )
 
     # If clip is in the model, we need to remove it for compatibility with deepspeed
     clip = None
-    if config.decoder.clip is not None:
-        clip = config.decoder.clip.create()  # Of course we keep it to use it during training, just not in the decoder as that causes issues
-        config.decoder.clip = None
-    # Create the decoder model and print basic info
-    decoder = config.decoder.create()
+    # SAM MODIFS
+    # if config.decoder.clip is not None:
+    #     clip = config.decoder.clip.create()  # Of course we keep it to use it during training, just not in the decoder as that causes issues
+    #     config.decoder.clip = None
+    # # Create the decoder model and print basic info
+    # decoder = config.decoder.create()
+    
+    clip = OpenAIClipAdapter(model_name, model_path, is_open_clip=True) 
+    decoder_config = TrainDecoderConfig.from_json_path("pretrained_models/decoder_v1.0.2_upsampler_config.json").decoder
+    decoder = decoder_config.create()
+    decoder.clip = None
+    decoder_unet_0_state = torch.load("pretrained_models/decoder_v1.0.2.pth")["model"]
+    decoder_unet_1_state = torch.load("pretrained_models/upsampler/veldrovive/latest.pth")
+    # decoder_unet_2_state = torch.load("pretrained_models/upsampler/v1.0.2/latest.pth")["model"]
+    decoder.load_state_dict(decoder_unet_0_state, strict=False)
+    decoder.load_state_dict(decoder_unet_1_state, strict=False)
+    # decoder.load_state_dict(decoder_unet_2_state, strict=False)
+    
     get_num_parameters = lambda model, only_training=False: sum(p.numel() for p in model.parameters() if (p.requires_grad or not only_training))
 
     # Create and initialize the tracker if we are the master
@@ -635,13 +714,13 @@ def initialize_training(config: TrainDecoderConfig, config_path):
         tracker=tracker,
         inference_device=accelerator.device,
         evaluate_config=config.evaluate,
-        condition_on_text_encodings=conditioning_on_text,
-        **config.train.model_dump(),
+        condition_on_text_encodings=conditioning_on_text
+        # **config.train.model_dump(),
     )
     
 # Create a simple click command line interface to load the config and start the training
 @click.command()
-@click.option("--config_file", default="./train_decoder_config.json", help="Path to config file")
+@click.option("--config_file", default="./configs/train_decoder_config.example.json", help="Path to config file")
 def main(config_file):
     config_file_path = Path(config_file)
     config = TrainDecoderConfig.from_json_path(str(config_file_path))

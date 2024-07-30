@@ -1,0 +1,2371 @@
+Decoder(
+  (clip): OpenAIClipAdapter(
+    (clip): CLIP(
+      (visual): VisionTransformer(
+        (conv1): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14), bias=False)
+        (ln_pre): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+        (transformer): Transformer(
+          (resblocks): Sequential(
+            (0): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (1): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (2): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (3): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (4): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (5): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (6): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (7): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (8): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (9): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (10): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (11): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (12): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (13): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (14): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (15): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (16): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (17): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (18): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (19): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (20): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (21): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (22): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (23): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+          )
+        )
+        (ln_post): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      )
+      (transformer): Transformer(
+        (resblocks): Sequential(
+          (0): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (2): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (3): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (5): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (6): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (7): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (8): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (9): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (10): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (11): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+        )
+      )
+      (token_embedding): Embedding(49408, 768)
+      (ln_final): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+    )
+    (clip_normalize): Normalize(mean=(0.48145466, 0.4578275, 0.40821073), std=(0.26862954, 0.26130258, 0.27577711))
+  )
+  (unets): ModuleList(
+    (0): Unet(
+      (init_conv): CrossEmbedLayer(
+        (convs): ModuleList(
+          (0): Conv2d(3, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): Conv2d(3, 80, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+          (2): Conv2d(3, 80, kernel_size=(15, 15), stride=(1, 1), padding=(7, 7))
+        )
+      )
+      (to_time_hiddens): Sequential(
+        (0): SinusoidalPosEmb()
+        (1): Linear(in_features=320, out_features=1280, bias=True)
+        (2): GELU(approximate='none')
+      )
+      (to_time_tokens): Sequential(
+        (0): Linear(in_features=1280, out_features=1024, bias=True)
+        (1): Rearrange('b (r d) -> b r d', r=2)
+      )
+      (to_time_cond): Sequential(
+        (0): Linear(in_features=1280, out_features=1280, bias=True)
+      )
+      (image_to_tokens): Sequential(
+        (0): Linear(in_features=768, out_features=2048, bias=True)
+        (1): Rearrange('b (n d) -> b n d', n=4)
+      )
+      (to_image_hiddens): Sequential(
+        (0): Linear(in_features=768, out_features=1280, bias=True)
+        (1): GELU(approximate='none')
+      )
+      (norm_cond): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (norm_mid_cond): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (text_to_cond): Linear(in_features=768, out_features=512, bias=True)
+      (init_resnet_block): ResnetBlock(
+        (time_mlp): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=1280, out_features=640, bias=True)
+        )
+        (block1): Block(
+          (project): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 320, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (block2): Block(
+          (project): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 320, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (res_conv): Identity()
+      )
+      (downs): ModuleList(
+        (0): ModuleList(
+          (0): Conv2d(320, 320, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+          (1): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1280, out_features=640, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 320, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 320, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Identity()
+          )
+          (2): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1280, out_features=640, bias=True)
+              )
+              (block1): Block(
+                (project): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 320, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 320, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Identity()
+            )
+          )
+          (3): Residual(
+            (fn): LinearAttention(
+              (norm): ChanLayerNorm()
+              (nonlin): GELU(approximate='none')
+              (to_qkv): Conv2d(320, 1536, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (to_out): Sequential(
+                (0): Conv2d(512, 320, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (1): ChanLayerNorm()
+              )
+            )
+          )
+          (4): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (1): ModuleList(
+          (0): Conv2d(320, 640, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+          (1): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1280, out_features=1280, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(640, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 640, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(640, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 640, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Identity()
+          )
+          (2): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1280, out_features=1280, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=640, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=640, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(640, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 640, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(640, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 640, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Identity()
+            )
+          )
+          (3): EinopsToAndFrom(
+            (fn): Residual(
+              (fn): Attention(
+                (norm): LayerNorm()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=640, out_features=512, bias=False)
+                (to_kv): Linear(in_features=640, out_features=128, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=640, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+          )
+          (4): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (2): ModuleList(
+          (0): Conv2d(640, 960, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+          (1): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1280, out_features=1920, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(960, 960, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 960, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(960, 960, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 960, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Identity()
+          )
+          (2): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1280, out_features=1920, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=960, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=960, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(960, 960, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 960, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(960, 960, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 960, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Identity()
+            )
+          )
+          (3): EinopsToAndFrom(
+            (fn): Residual(
+              (fn): Attention(
+                (norm): LayerNorm()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=960, out_features=512, bias=False)
+                (to_kv): Linear(in_features=960, out_features=128, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=960, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+          )
+          (4): Conv2d(960, 960, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (3): ModuleList(
+          (0): Conv2d(960, 1280, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+          (1): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1280, out_features=2560, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(1280, 1280, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 1280, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(1280, 1280, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 1280, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Identity()
+          )
+          (2): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1280, out_features=2560, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=1280, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=1280, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(1280, 1280, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 1280, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(1280, 1280, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 1280, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Identity()
+            )
+          )
+          (3): EinopsToAndFrom(
+            (fn): Residual(
+              (fn): Attention(
+                (norm): LayerNorm()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=1280, out_features=512, bias=False)
+                (to_kv): Linear(in_features=1280, out_features=128, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=1280, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+          )
+          (4): Conv2d(1280, 1280, kernel_size=(1, 1), stride=(1, 1))
+        )
+      )
+      (ups): ModuleList(
+        (0): ModuleList(
+          (0): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1280, out_features=2560, bias=True)
+            )
+            (cross_attn): EinopsToAndFrom(
+              (fn): CrossAttention(
+                (norm): LayerNorm()
+                (norm_context): Identity()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=1280, out_features=512, bias=False)
+                (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=1280, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+            (block1): Block(
+              (project): Conv2d(2560, 1280, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 1280, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(1280, 1280, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 1280, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Conv2d(2560, 1280, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (1): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1280, out_features=2560, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=1280, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=1280, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(2560, 1280, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 1280, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(1280, 1280, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 1280, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Conv2d(2560, 1280, kernel_size=(1, 1), stride=(1, 1))
+            )
+          )
+          (2): EinopsToAndFrom(
+            (fn): Residual(
+              (fn): Attention(
+                (norm): LayerNorm()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=1280, out_features=512, bias=False)
+                (to_kv): Linear(in_features=1280, out_features=128, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=1280, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+          )
+          (3): PixelShuffleUpsample(
+            (net): Sequential(
+              (0): Conv2d(1280, 3840, kernel_size=(1, 1), stride=(1, 1))
+              (1): SiLU()
+              (2): PixelShuffle(upscale_factor=2)
+            )
+          )
+        )
+        (1): ModuleList(
+          (0): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1280, out_features=1920, bias=True)
+            )
+            (cross_attn): EinopsToAndFrom(
+              (fn): CrossAttention(
+                (norm): LayerNorm()
+                (norm_context): Identity()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=960, out_features=512, bias=False)
+                (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=960, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+            (block1): Block(
+              (project): Conv2d(1920, 960, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 960, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(960, 960, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 960, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Conv2d(1920, 960, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (1): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1280, out_features=1920, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=960, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=960, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(1920, 960, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 960, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(960, 960, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 960, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Conv2d(1920, 960, kernel_size=(1, 1), stride=(1, 1))
+            )
+          )
+          (2): EinopsToAndFrom(
+            (fn): Residual(
+              (fn): Attention(
+                (norm): LayerNorm()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=960, out_features=512, bias=False)
+                (to_kv): Linear(in_features=960, out_features=128, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=960, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+          )
+          (3): PixelShuffleUpsample(
+            (net): Sequential(
+              (0): Conv2d(960, 2560, kernel_size=(1, 1), stride=(1, 1))
+              (1): SiLU()
+              (2): PixelShuffle(upscale_factor=2)
+            )
+          )
+        )
+        (2): ModuleList(
+          (0): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1280, out_features=1280, bias=True)
+            )
+            (cross_attn): EinopsToAndFrom(
+              (fn): CrossAttention(
+                (norm): LayerNorm()
+                (norm_context): Identity()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=640, out_features=512, bias=False)
+                (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=640, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+            (block1): Block(
+              (project): Conv2d(1280, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 640, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(640, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 640, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Conv2d(1280, 640, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (1): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1280, out_features=1280, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=640, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=640, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(1280, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 640, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(640, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 640, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Conv2d(1280, 640, kernel_size=(1, 1), stride=(1, 1))
+            )
+          )
+          (2): EinopsToAndFrom(
+            (fn): Residual(
+              (fn): Attention(
+                (norm): LayerNorm()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=640, out_features=512, bias=False)
+                (to_kv): Linear(in_features=640, out_features=128, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=640, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+          )
+          (3): PixelShuffleUpsample(
+            (net): Sequential(
+              (0): Conv2d(640, 1280, kernel_size=(1, 1), stride=(1, 1))
+              (1): SiLU()
+              (2): PixelShuffle(upscale_factor=2)
+            )
+          )
+        )
+        (3): ModuleList(
+          (0): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1280, out_features=640, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(640, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 320, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 320, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (1): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1280, out_features=640, bias=True)
+              )
+              (block1): Block(
+                (project): Conv2d(640, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 320, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 320, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+            )
+          )
+          (2): Residual(
+            (fn): LinearAttention(
+              (norm): ChanLayerNorm()
+              (nonlin): GELU(approximate='none')
+              (to_qkv): Conv2d(320, 1536, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (to_out): Sequential(
+                (0): Conv2d(512, 320, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (1): ChanLayerNorm()
+              )
+            )
+          )
+          (3): PixelShuffleUpsample(
+            (net): Sequential(
+              (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+              (1): SiLU()
+              (2): PixelShuffle(upscale_factor=2)
+            )
+          )
+        )
+      )
+      (mid_block1): ResnetBlock(
+        (time_mlp): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=1280, out_features=2560, bias=True)
+        )
+        (cross_attn): EinopsToAndFrom(
+          (fn): CrossAttention(
+            (norm): LayerNorm()
+            (norm_context): Identity()
+            (dropout): Dropout(p=0.0, inplace=False)
+            (to_q): Linear(in_features=1280, out_features=512, bias=False)
+            (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=512, out_features=1280, bias=False)
+              (1): LayerNorm()
+            )
+          )
+        )
+        (block1): Block(
+          (project): Conv2d(1280, 1280, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 1280, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (block2): Block(
+          (project): Conv2d(1280, 1280, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 1280, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (res_conv): Identity()
+      )
+      (mid_attn): EinopsToAndFrom(
+        (fn): Residual(
+          (fn): Attention(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.0, inplace=False)
+            (to_q): Linear(in_features=1280, out_features=512, bias=False)
+            (to_kv): Linear(in_features=1280, out_features=128, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=512, out_features=1280, bias=False)
+              (1): LayerNorm()
+            )
+          )
+        )
+      )
+      (mid_block2): ResnetBlock(
+        (time_mlp): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=1280, out_features=2560, bias=True)
+        )
+        (cross_attn): EinopsToAndFrom(
+          (fn): CrossAttention(
+            (norm): LayerNorm()
+            (norm_context): Identity()
+            (dropout): Dropout(p=0.0, inplace=False)
+            (to_q): Linear(in_features=1280, out_features=512, bias=False)
+            (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=512, out_features=1280, bias=False)
+              (1): LayerNorm()
+            )
+          )
+        )
+        (block1): Block(
+          (project): Conv2d(1280, 1280, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 1280, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (block2): Block(
+          (project): Conv2d(1280, 1280, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 1280, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (res_conv): Identity()
+      )
+      (upsample_combiner): UpsampleCombiner()
+      (final_resnet_block): ResnetBlock(
+        (time_mlp): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=1280, out_features=640, bias=True)
+        )
+        (block1): Block(
+          (project): Conv2d(640, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 320, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (block2): Block(
+          (project): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 320, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (res_conv): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (to_out): Conv2d(320, 6, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (1): Unet(
+      (init_conv): Conv2d(6, 256, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+      (to_time_hiddens): Sequential(
+        (0): SinusoidalPosEmb()
+        (1): Linear(in_features=256, out_features=1024, bias=True)
+        (2): GELU(approximate='none')
+      )
+      (to_time_tokens): Sequential(
+        (0): Linear(in_features=1024, out_features=1024, bias=True)
+        (1): Rearrange('b (r d) -> b r d', r=2)
+      )
+      (to_time_cond): Sequential(
+        (0): Linear(in_features=1024, out_features=1024, bias=True)
+      )
+      (image_to_tokens): Identity()
+      (norm_cond): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (norm_mid_cond): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (text_to_cond): Linear(in_features=768, out_features=512, bias=True)
+      (init_resnet_block): ResnetBlock(
+        (time_mlp): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=1024, out_features=512, bias=True)
+        )
+        (block1): Block(
+          (project): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 256, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (block2): Block(
+          (project): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 256, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (res_conv): Identity()
+      )
+      (downs): ModuleList(
+        (0): ModuleList(
+          (0): Conv2d(256, 256, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+          (1): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1024, out_features=512, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 256, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 256, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Identity()
+          )
+          (2): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1024, out_features=512, bias=True)
+              )
+              (block1): Block(
+                (project): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 256, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 256, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Identity()
+            )
+          )
+          (3): Identity()
+          (4): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (1): ModuleList(
+          (0): Conv2d(256, 512, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+          (1): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1024, out_features=1024, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 512, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 512, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Identity()
+          )
+          (2): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1024, out_features=1024, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=512, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=512, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 512, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 512, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Identity()
+            )
+          )
+          (3): Identity()
+          (4): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (2): ModuleList(
+          (0): Conv2d(512, 768, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+          (1): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1024, out_features=1536, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Identity()
+          )
+          (2): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1024, out_features=1536, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=768, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=768, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Identity()
+            )
+          )
+          (3): Identity()
+          (4): Conv2d(768, 768, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (3): ModuleList(
+          (0): Conv2d(768, 1024, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+          (1): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1024, out_features=2048, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 1024, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 1024, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Identity()
+          )
+          (2): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1024, out_features=2048, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=1024, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=1024, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 1024, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 1024, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Identity()
+            )
+          )
+          (3): Identity()
+          (4): Conv2d(1024, 1024, kernel_size=(1, 1), stride=(1, 1))
+        )
+      )
+      (ups): ModuleList(
+        (0): ModuleList(
+          (0): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1024, out_features=2048, bias=True)
+            )
+            (cross_attn): EinopsToAndFrom(
+              (fn): CrossAttention(
+                (norm): LayerNorm()
+                (norm_context): Identity()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=1024, out_features=512, bias=False)
+                (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=1024, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+            (block1): Block(
+              (project): Conv2d(2048, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 1024, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 1024, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Conv2d(2048, 1024, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (1): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1024, out_features=2048, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=1024, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=1024, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(2048, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 1024, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 1024, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Conv2d(2048, 1024, kernel_size=(1, 1), stride=(1, 1))
+            )
+          )
+          (2): Identity()
+          (3): PixelShuffleUpsample(
+            (net): Sequential(
+              (0): Conv2d(1024, 3072, kernel_size=(1, 1), stride=(1, 1))
+              (1): SiLU()
+              (2): PixelShuffle(upscale_factor=2)
+            )
+          )
+        )
+        (1): ModuleList(
+          (0): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1024, out_features=1536, bias=True)
+            )
+            (cross_attn): EinopsToAndFrom(
+              (fn): CrossAttention(
+                (norm): LayerNorm()
+                (norm_context): Identity()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=768, out_features=512, bias=False)
+                (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=768, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+            (block1): Block(
+              (project): Conv2d(1536, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Conv2d(1536, 768, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (1): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1024, out_features=1536, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=768, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=768, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(1536, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Conv2d(1536, 768, kernel_size=(1, 1), stride=(1, 1))
+            )
+          )
+          (2): Identity()
+          (3): PixelShuffleUpsample(
+            (net): Sequential(
+              (0): Conv2d(768, 2048, kernel_size=(1, 1), stride=(1, 1))
+              (1): SiLU()
+              (2): PixelShuffle(upscale_factor=2)
+            )
+          )
+        )
+        (2): ModuleList(
+          (0): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1024, out_features=1024, bias=True)
+            )
+            (cross_attn): EinopsToAndFrom(
+              (fn): CrossAttention(
+                (norm): LayerNorm()
+                (norm_context): Identity()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=512, out_features=512, bias=False)
+                (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=512, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+            (block1): Block(
+              (project): Conv2d(1024, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 512, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 512, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (1): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1024, out_features=1024, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=512, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=512, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(1024, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 512, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 512, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1))
+            )
+          )
+          (2): Identity()
+          (3): PixelShuffleUpsample(
+            (net): Sequential(
+              (0): Conv2d(512, 1024, kernel_size=(1, 1), stride=(1, 1))
+              (1): SiLU()
+              (2): PixelShuffle(upscale_factor=2)
+            )
+          )
+        )
+        (3): ModuleList(
+          (0): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=1024, out_features=512, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(512, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 256, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 256, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (1): ModuleList(
+            (0-3): 4 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=1024, out_features=512, bias=True)
+              )
+              (block1): Block(
+                (project): Conv2d(512, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 256, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 256, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+            )
+          )
+          (2): Identity()
+          (3): PixelShuffleUpsample(
+            (net): Sequential(
+              (0): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1))
+              (1): SiLU()
+              (2): PixelShuffle(upscale_factor=2)
+            )
+          )
+        )
+      )
+      (mid_block1): ResnetBlock(
+        (time_mlp): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=1024, out_features=2048, bias=True)
+        )
+        (cross_attn): EinopsToAndFrom(
+          (fn): CrossAttention(
+            (norm): LayerNorm()
+            (norm_context): Identity()
+            (dropout): Dropout(p=0.0, inplace=False)
+            (to_q): Linear(in_features=1024, out_features=512, bias=False)
+            (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=512, out_features=1024, bias=False)
+              (1): LayerNorm()
+            )
+          )
+        )
+        (block1): Block(
+          (project): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 1024, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (block2): Block(
+          (project): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 1024, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (res_conv): Identity()
+      )
+      (mid_attn): EinopsToAndFrom(
+        (fn): Residual(
+          (fn): Attention(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.0, inplace=False)
+            (to_q): Linear(in_features=1024, out_features=512, bias=False)
+            (to_kv): Linear(in_features=1024, out_features=128, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=512, out_features=1024, bias=False)
+              (1): LayerNorm()
+            )
+          )
+        )
+      )
+      (mid_block2): ResnetBlock(
+        (time_mlp): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=1024, out_features=2048, bias=True)
+        )
+        (cross_attn): EinopsToAndFrom(
+          (fn): CrossAttention(
+            (norm): LayerNorm()
+            (norm_context): Identity()
+            (dropout): Dropout(p=0.0, inplace=False)
+            (to_q): Linear(in_features=1024, out_features=512, bias=False)
+            (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=512, out_features=1024, bias=False)
+              (1): LayerNorm()
+            )
+          )
+        )
+        (block1): Block(
+          (project): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 1024, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (block2): Block(
+          (project): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 1024, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (res_conv): Identity()
+      )
+      (upsample_combiner): UpsampleCombiner()
+      (final_resnet_block): ResnetBlock(
+        (time_mlp): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=1024, out_features=512, bias=True)
+        )
+        (block1): Block(
+          (project): Conv2d(512, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 256, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (block2): Block(
+          (project): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 256, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (res_conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (to_out): Conv2d(259, 3, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (2): Unet(
+      (init_conv): Conv2d(6, 192, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+      (to_time_hiddens): Sequential(
+        (0): SinusoidalPosEmb()
+        (1): Linear(in_features=192, out_features=768, bias=True)
+        (2): GELU(approximate='none')
+      )
+      (to_time_tokens): Sequential(
+        (0): Linear(in_features=768, out_features=1024, bias=True)
+        (1): Rearrange('b (r d) -> b r d', r=2)
+      )
+      (to_time_cond): Sequential(
+        (0): Linear(in_features=768, out_features=768, bias=True)
+      )
+      (image_to_tokens): Identity()
+      (norm_cond): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (norm_mid_cond): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (text_to_cond): Linear(in_features=768, out_features=512, bias=True)
+      (init_resnet_block): ResnetBlock(
+        (time_mlp): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=768, out_features=384, bias=True)
+        )
+        (block1): Block(
+          (project): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 192, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (block2): Block(
+          (project): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 192, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (res_conv): Identity()
+      )
+      (downs): ModuleList(
+        (0): ModuleList(
+          (0): Conv2d(192, 192, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+          (1): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=768, out_features=384, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 192, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 192, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Identity()
+          )
+          (2): ModuleList(
+            (0-2): 3 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=768, out_features=384, bias=True)
+              )
+              (block1): Block(
+                (project): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 192, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 192, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Identity()
+            )
+          )
+          (3): Identity()
+          (4): Conv2d(192, 192, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (1): ModuleList(
+          (0): Conv2d(192, 384, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+          (1): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 384, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 384, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Identity()
+          )
+          (2): ModuleList(
+            (0-2): 3 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=768, out_features=768, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=384, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=384, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 384, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 384, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Identity()
+            )
+          )
+          (3): Identity()
+          (4): Conv2d(384, 384, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (2): ModuleList(
+          (0): Conv2d(384, 576, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+          (1): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=768, out_features=1152, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(576, 576, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 576, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(576, 576, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 576, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Identity()
+          )
+          (2): ModuleList(
+            (0-2): 3 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=768, out_features=1152, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=576, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=576, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(576, 576, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 576, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(576, 576, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 576, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Identity()
+            )
+          )
+          (3): Identity()
+          (4): Conv2d(576, 576, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (3): ModuleList(
+          (0): Conv2d(576, 768, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+          (1): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=768, out_features=1536, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Identity()
+          )
+          (2): ModuleList(
+            (0-2): 3 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=768, out_features=1536, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=768, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=768, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Identity()
+            )
+          )
+          (3): Identity()
+          (4): Conv2d(768, 768, kernel_size=(1, 1), stride=(1, 1))
+        )
+      )
+      (ups): ModuleList(
+        (0): ModuleList(
+          (0): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=768, out_features=1536, bias=True)
+            )
+            (cross_attn): EinopsToAndFrom(
+              (fn): CrossAttention(
+                (norm): LayerNorm()
+                (norm_context): Identity()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=768, out_features=512, bias=False)
+                (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=768, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+            (block1): Block(
+              (project): Conv2d(1536, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Conv2d(1536, 768, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (1): ModuleList(
+            (0-2): 3 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=768, out_features=1536, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=768, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=768, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(1536, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Conv2d(1536, 768, kernel_size=(1, 1), stride=(1, 1))
+            )
+          )
+          (2): Identity()
+          (3): PixelShuffleUpsample(
+            (net): Sequential(
+              (0): Conv2d(768, 2304, kernel_size=(1, 1), stride=(1, 1))
+              (1): SiLU()
+              (2): PixelShuffle(upscale_factor=2)
+            )
+          )
+        )
+        (1): ModuleList(
+          (0): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=768, out_features=1152, bias=True)
+            )
+            (cross_attn): EinopsToAndFrom(
+              (fn): CrossAttention(
+                (norm): LayerNorm()
+                (norm_context): Identity()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=576, out_features=512, bias=False)
+                (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=576, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+            (block1): Block(
+              (project): Conv2d(1152, 576, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 576, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(576, 576, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 576, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Conv2d(1152, 576, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (1): ModuleList(
+            (0-2): 3 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=768, out_features=1152, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=576, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=576, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(1152, 576, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 576, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(576, 576, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 576, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Conv2d(1152, 576, kernel_size=(1, 1), stride=(1, 1))
+            )
+          )
+          (2): Identity()
+          (3): PixelShuffleUpsample(
+            (net): Sequential(
+              (0): Conv2d(576, 1536, kernel_size=(1, 1), stride=(1, 1))
+              (1): SiLU()
+              (2): PixelShuffle(upscale_factor=2)
+            )
+          )
+        )
+        (2): ModuleList(
+          (0): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (cross_attn): EinopsToAndFrom(
+              (fn): CrossAttention(
+                (norm): LayerNorm()
+                (norm_context): Identity()
+                (dropout): Dropout(p=0.0, inplace=False)
+                (to_q): Linear(in_features=384, out_features=512, bias=False)
+                (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                (to_out): Sequential(
+                  (0): Linear(in_features=512, out_features=384, bias=False)
+                  (1): LayerNorm()
+                )
+              )
+            )
+            (block1): Block(
+              (project): Conv2d(768, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 384, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 384, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Conv2d(768, 384, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (1): ModuleList(
+            (0-2): 3 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=768, out_features=768, bias=True)
+              )
+              (cross_attn): EinopsToAndFrom(
+                (fn): CrossAttention(
+                  (norm): LayerNorm()
+                  (norm_context): Identity()
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  (to_q): Linear(in_features=384, out_features=512, bias=False)
+                  (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+                  (to_out): Sequential(
+                    (0): Linear(in_features=512, out_features=384, bias=False)
+                    (1): LayerNorm()
+                  )
+                )
+              )
+              (block1): Block(
+                (project): Conv2d(768, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 384, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 384, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Conv2d(768, 384, kernel_size=(1, 1), stride=(1, 1))
+            )
+          )
+          (2): Identity()
+          (3): PixelShuffleUpsample(
+            (net): Sequential(
+              (0): Conv2d(384, 768, kernel_size=(1, 1), stride=(1, 1))
+              (1): SiLU()
+              (2): PixelShuffle(upscale_factor=2)
+            )
+          )
+        )
+        (3): ModuleList(
+          (0): ResnetBlock(
+            (time_mlp): Sequential(
+              (0): SiLU()
+              (1): Linear(in_features=768, out_features=384, bias=True)
+            )
+            (block1): Block(
+              (project): Conv2d(384, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 192, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (block2): Block(
+              (project): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (norm): GroupNorm(8, 192, eps=1e-05, affine=True)
+              (act): SiLU()
+            )
+            (res_conv): Conv2d(384, 192, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (1): ModuleList(
+            (0-2): 3 x ResnetBlock(
+              (time_mlp): Sequential(
+                (0): SiLU()
+                (1): Linear(in_features=768, out_features=384, bias=True)
+              )
+              (block1): Block(
+                (project): Conv2d(384, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 192, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (block2): Block(
+                (project): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (norm): GroupNorm(8, 192, eps=1e-05, affine=True)
+                (act): SiLU()
+              )
+              (res_conv): Conv2d(384, 192, kernel_size=(1, 1), stride=(1, 1))
+            )
+          )
+          (2): Identity()
+          (3): PixelShuffleUpsample(
+            (net): Sequential(
+              (0): Conv2d(192, 768, kernel_size=(1, 1), stride=(1, 1))
+              (1): SiLU()
+              (2): PixelShuffle(upscale_factor=2)
+            )
+          )
+        )
+      )
+      (mid_block1): ResnetBlock(
+        (time_mlp): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=768, out_features=1536, bias=True)
+        )
+        (cross_attn): EinopsToAndFrom(
+          (fn): CrossAttention(
+            (norm): LayerNorm()
+            (norm_context): Identity()
+            (dropout): Dropout(p=0.0, inplace=False)
+            (to_q): Linear(in_features=768, out_features=512, bias=False)
+            (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=512, out_features=768, bias=False)
+              (1): LayerNorm()
+            )
+          )
+        )
+        (block1): Block(
+          (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (block2): Block(
+          (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (res_conv): Identity()
+      )
+      (mid_attn): EinopsToAndFrom(
+        (fn): Residual(
+          (fn): Attention(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.0, inplace=False)
+            (to_q): Linear(in_features=768, out_features=512, bias=False)
+            (to_kv): Linear(in_features=768, out_features=128, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=512, out_features=768, bias=False)
+              (1): LayerNorm()
+            )
+          )
+        )
+      )
+      (mid_block2): ResnetBlock(
+        (time_mlp): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=768, out_features=1536, bias=True)
+        )
+        (cross_attn): EinopsToAndFrom(
+          (fn): CrossAttention(
+            (norm): LayerNorm()
+            (norm_context): Identity()
+            (dropout): Dropout(p=0.0, inplace=False)
+            (to_q): Linear(in_features=768, out_features=512, bias=False)
+            (to_kv): Linear(in_features=512, out_features=1024, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=512, out_features=768, bias=False)
+              (1): LayerNorm()
+            )
+          )
+        )
+        (block1): Block(
+          (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (block2): Block(
+          (project): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 768, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (res_conv): Identity()
+      )
+      (upsample_combiner): UpsampleCombiner()
+      (final_resnet_block): ResnetBlock(
+        (time_mlp): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=768, out_features=384, bias=True)
+        )
+        (block1): Block(
+          (project): Conv2d(384, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 192, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (block2): Block(
+          (project): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (norm): GroupNorm(8, 192, eps=1e-05, affine=True)
+          (act): SiLU()
+        )
+        (res_conv): Conv2d(384, 192, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (to_out): Conv2d(195, 3, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+  (vaes): ModuleList(
+    (0-2): 3 x NullVQGanVAE()
+  )
+  (noise_schedulers): ModuleList(
+    (0-2): 3 x NoiseScheduler()
+  )
+  (lowres_conds): ModuleList(
+    (0): None
+    (1-2): 2 x LowresConditioner()
+  )
+)

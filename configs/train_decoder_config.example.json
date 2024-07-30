@@ -2,20 +2,47 @@
     "decoder": {
         "unets": [
             {
-                "dim": 128,
+                "dim": 320,
+                "cond_dim": 512,
                 "image_embed_dim": 768,
-                "cond_dim": 64,
+                "text_embed_dim": 768,
+                "cond_on_text_encodings": true,
                 "channels": 3,
-                "dim_mults": [1, 2, 4, 8],
-                "attn_dim_head": 32,
-                "attn_heads": 16
+                "dim_mults": [1, 2, 3, 4],
+                "num_resnet_blocks": 4,
+                "attn_heads": 8,
+                "attn_dim_head": 64,
+                "sparse_attn": true,
+                "memory_efficient": true,
+		        "self_attn": [false, true, true, true]
+            },
+              {
+                "dim": 256,
+                "cond_dim": 512,
+                "image_embed_dim": 768,
+                "text_embed_dim": 768,
+                "cond_on_text_encodings": true,
+                "init_cross_embed": false,
+                "channels": 3,
+                "dim_mults": [1, 2, 3, 4],
+                "num_resnet_blocks": 4,
+                "attn_heads": 8,
+                "attn_dim_head": 64,
+                "sparse_attn": false,
+                "memory_efficient": true,
+                "self_attn": [false, false, false, false]
             }
         ],
-        "image_sizes": [64],
+        "clip": {
+            "make": "openai",
+            "model": "ViT-L/14"
+        },
+        "image_sizes": [64, 256],
+        "random_crop_sizes": [null, null],
         "channels": 3,
         "timesteps": 1000,
         "loss_type": "l2",
-        "beta_schedule": ["cosine"],
+        "beta_schedule": ["cosine", "cosine"],
         "learned_variance": true
     },
     "data": {
@@ -45,12 +72,12 @@
     },
     "train": {
         "epochs": 20,
-        "lr": 1e-4,
+        "lr": 1e-6,
         "wd": 0.01,
         "max_grad_norm": 0.5,
         "save_every_n_samples": 100000,
         "n_sample_images": 6,
-        "device": "cuda:0",
+        "device": "cuda:1,2,3",
         "epoch_samples": null,
         "validation_samples": null,
         "use_ema": true,
@@ -80,12 +107,7 @@
         "overwrite_data_path": true,
 
         "log": {
-            "log_type": "wandb",
-
-            "wandb_entity": "your_wandb",
-            "wandb_project": "your_project",
-
-            "verbose": true
+            "log_type": "console"
         },
 
         "load": {
@@ -93,17 +115,8 @@
         },
 
         "save": [{
-            "save_to": "wandb",
+            "save_to": "local",
             "save_latest_to": "latest.pth"
-        }, {
-            "save_to": "huggingface",
-            "huggingface_repo": "Veldrovive/test_model",
-
-            "save_latest_to": "path/to/model_dir/latest.pth",
-            "save_best_to": "path/to/model_dir/best.pth",
-            "save_meta_to": "path/to/directory/for/assorted/files",
-
-            "save_type": "model"
         }]
     }
 }
