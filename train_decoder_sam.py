@@ -50,7 +50,8 @@ class ImageCaptionDataset(Dataset):
             batch = all_images[i:i + self.batch_size]
             batches.append(batch)
         return batches
-    
+
+get_num_parameters = lambda model, only_training=False: sum(p.numel() for p in model.parameters() if (p.requires_grad or not only_training))
 
 # Define image transformations
 transform = transforms.Compose([
@@ -62,32 +63,32 @@ accelerator = Accelerator()
 device = accelerator.device
 
 # model_path = "./pretrained_models/clip/ViT-L-14.pt"
-model_path = './logs/2024_07_19-11_27_30-model_ViT-L-14-lr_5e-06-b_100-j_4-p_amp/checkpoints/ViT-L-14.pt'
-model_name = "ViT-L-14"
+clip_path = './logs/2024_07_19-11_27_30-model_ViT-L-14-lr_5e-06-b_100-j_4-p_amp/checkpoints/ViT-L-14.pt'
+clip_name = "ViT-L-14"
 
-custom_clip = OpenAIClipAdapter(model_name, model_path, is_open_clip=True) 
-clip_tokenizer = open_clip.get_tokenizer(model_name)
-custom_clip.to(device)
+# custom_clip = OpenAIClipAdapter(model_name, model_path, is_open_clip=True) 
+clip_tokenizer = open_clip.get_tokenizer(clip_name)
+
+# print(f"CLIP has {get_num_parameters(custom_clip)}")
 
 # mock data
 train_dataset = ImageCaptionDataset(csv_file='./dataset/captions_train.csv', transform=transform, tokenizer=clip_tokenizer)
 val_dataset = ImageCaptionDataset(csv_file='./dataset/captions_val.csv', transform=transform, tokenizer=clip_tokenizer)
 
-train_dataloader = DataLoader(train_dataset, batch_size=1, shuffle=True, num_workers=1)
-val_dataloader = DataLoader(val_dataset, batch_size=1, shuffle=True, num_workers=1)
+train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=8)
+val_dataloader = DataLoader(val_dataset, batch_size=32, shuffle=True, num_workers=8)
 
 decoder_config = TrainDecoderConfig.from_json_path("pretrained_models/decoder_v1.0.2_upsampler_config.json").decoder
 decoder = decoder_config.create()
 
-decoder_unet_0_state = torch.load("pretrained_models/decoder_v1.0.2.pth")["model"]
-decoder_unet_1_state = torch.load("pretrained_models/upsampler/veldrovive/latest.pth")
+# decoder_unet_0_state = torch.load("pretrained_models/decoder_v1.0.2.pth")["model"]
+# decoder_unet_1_state = torch.load("pretrained_models/upsampler/veldrovive/latest.pth")
 # decoder_unet_2_state = torch.load("pretrained_models/upsampler/v1.0.2/latest.pth")["model"]
-decoder.load_state_dict(decoder_unet_0_state, strict=False)
-decoder.load_state_dict(decoder_unet_1_state, strict=False)
+# decoder.load_state_dict(decoder_unet_0_state, strict=False)
+# decoder.load_state_dict(decoder_unet_1_state, strict=False)
 # decoder.load_state_dict(decoder_unet_2_state, strict=False)
 
-decoder.clip = custom_clip
-decoder.to(device)
+# decoder.clip = custom_clip
 
 decoder_trainer = DecoderTrainer(
     decoder,
@@ -103,9 +104,14 @@ decoder_trainer = DecoderTrainer(
     ema_update_every = 10,
 )
 
+decoder_trainer.load(path="pretrained_models/decoder_v1.0.2.pth", only_model=True, strict=False)
+decoder_trainer.load(path="pretrained_models/upsampler/veldrovive/latest.pth", only_model=True, strict=False, model_arg=False)
+decoder_trainer.load_clip(clip_name, clip_path)
+
 epochs = 20
 for epoch in range(epochs):
-    print('Running epoch ', epoch, "/", epochs)
+    if accelerator.is_main_process:
+        print('Running epoch ', epoch, "/", epochs)
     for unet_number in (1, 2):
         loss = decoder_trainer(
             unet_number = unet_number, # which unet to train on

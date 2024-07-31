@@ -71,55 +71,55 @@ def main():
     decoder.load_state_dict(decoder_unet_1_state, strict=False)
     decoder.clip = custom_clip
 
-    # # Prepare the model and optimizer for distributed training
-    # decoder, train_loader, val_loader = accelerator.prepare(decoder, train_loader, val_loader)
+    # Prepare the model and optimizer for distributed training
+    decoder, train_loader, val_loader = accelerator.prepare(decoder, train_loader, val_loader)
         
-    # decoder_trainer = DecoderTrainer(
-    #     decoder,
-    #     lr = 1e-5,
-    #     wd = 1e-2,
-    #     ema_beta = 0.99,
-    #     ema_update_after_step = 1000,
-    #     ema_update_every = 10,
-    # )
+    decoder_trainer = DecoderTrainer(
+        decoder,
+        lr = 1e-5,
+        wd = 1e-2,
+        ema_beta = 0.99,
+        ema_update_after_step = 1000,
+        ema_update_every = 10,
+    )
 
-    # epochs = 10
-    # for epoch in range(epochs):
-    #     decoder.train()
-    #     train_loss = 0.0
-    #     for images, captions in train_loader:
-    #         loss = decoder_trainer(
-    #             images,
-    #             text=captions,
-    #             max_batch_size=4
-    #         )
-    #         decoder_trainer.update()
-    #         train_loss += loss.item()
+    epochs = 10
+    for epoch in range(epochs):
+        decoder.train()
+        train_loss = 0.0
+        for images, captions in train_loader:
+            loss = decoder_trainer(
+                images,
+                text=captions,
+                max_batch_size=4
+            )
+            decoder_trainer.update()
+            train_loss += loss.item()
 
-    #     train_loss /= len(train_loader)
-    #     if accelerator.is_main_process:
-    #         writer.add_scalar(f'Loss/train', train_loss, epoch)
+        train_loss /= len(train_loader)
+        if accelerator.is_main_process:
+            writer.add_scalar(f'Loss/train', train_loss, epoch)
 
-    #     decoder.eval()
-    #     val_loss = 0.0
-    #     with torch.no_grad():
-    #         for images, captions in val_loader:
-    #             loss = decoder_trainer(
-    #                 images,
-    #                 text=captions,
-    #                 max_batch_size=4
-    #             )
-    #             val_loss += loss.item()
+        decoder.eval()
+        val_loss = 0.0
+        with torch.no_grad():
+            for images, captions in val_loader:
+                loss = decoder_trainer(
+                    images,
+                    text=captions,
+                    max_batch_size=4
+                )
+                val_loss += loss.item()
 
-    #     val_loss /= len(val_loader)
-    #     if accelerator.is_main_process:
-    #         writer.add_scalar(f'Loss/val', val_loss, epoch)
+        val_loss /= len(val_loader)
+        if accelerator.is_main_process:
+            writer.add_scalar(f'Loss/val', val_loss, epoch)
 
-    #     if accelerator.is_main_process:
-    #         print(f"Epoch {epoch+1}/{epochs} - Train Loss: {train_loss}, Val Loss: {val_loss}")
+        if accelerator.is_main_process:
+            print(f"Epoch {epoch+1}/{epochs} - Train Loss: {train_loss}, Val Loss: {val_loss}")
 
-    # if accelerator.is_main_process:
-    #     writer.close()
+    if accelerator.is_main_process:
+        writer.close()
 
 if __name__ == "__main__":
     # Make sure to set the environment variable for distributed training if using

@@ -1,0 +1,28 @@
+{
+    "train_micro_batch_size_per_gpu": 1,
+    "gradient_accumulation_steps": 2,
+    "train_batch_size": 8,
+    "scheduler": {
+        "type": "WarmupLR",
+        "params": {
+            "warmup_min_lr": 0,
+            "warmup_max_lr": 5e-7,
+            "warmup_num_steps": 1000
+        }
+    },
+    "fp16": {
+        "enabled": false
+    },
+    "zero_optimization": {
+        "stage": 3,
+        "allgather_partitions": true,
+        "allgather_bucket_size": 2e8,
+        "overlap_comm": true,
+        "reduce_scatter": true,
+        "reduce_bucket_size": 2e8,
+        "contiguous_gradients": true
+    },
+    "gradient_clipping": 1.0,
+    "steps_per_print": 2000,
+    "wall_clock_breakdown": false
+}
