@@ -55,7 +55,10 @@ class ImageCaptionDataset(Dataset):
         image = Image.open(img_path).convert('RGB')
         if self.transform:
             image = self.transform(image)
-        return image, self.tokenizer([str(caption)])[0]
+        dummy_tensor = torch.tensor([])
+        tokenized_caption = self.tokenizer([str(caption)])[0] if self.tokenizer else caption
+        
+        return image, {'img': dummy_tensor, 'txt': dummy_tensor}, tokenized_caption
     
     def get_images(self):
         images = []
@@ -96,7 +99,7 @@ def create_dataloaders(
     # text_embeddings_url=None,
     # shard_width=6,
     num_workers=2,
-    batch_size=32,
+    batch_size=8,
     n_sample_images=6,
     shuffle_train=True,
     # resample_train=False,
@@ -144,8 +147,8 @@ def create_dataloaders(
     # test_dataloader = create_dataloader(test_urls, shuffle=False)
     # test_sampling_dataloader = create_dataloader(test_urls, shuffle=False, for_sampling=True)
     
-    train_dataset = ImageCaptionDataset(csv_file='./dataset/captions_train.csv', transform=transform, tokenizer=tokenize)
-    val_dataset = ImageCaptionDataset(csv_file='./dataset/captions_val.csv', transform=transform, tokenizer=tokenize)
+    train_dataset = ImageCaptionDataset(csv_file='./dataset/captions_train.csv', transform=transform)
+    val_dataset = ImageCaptionDataset(csv_file='./dataset/captions_val.csv', transform=transform)
 
     #TODO: ADD REAL TEST CSV FILES
     train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
@@ -200,7 +203,7 @@ def get_example_data(dataloader, device, n=5):
             break
     return list(zip(images[:n], img_embeddings[:n], text_embeddings[:n], captions[:n]))
 
-def generate_samples(trainer, example_data, clip=None, start_unet=1, end_unet=None, condition_on_text_encodings=False, cond_scale=1.0, device=None, text_prepend="", match_image_size=True):
+def generate_samples(trainer: DecoderTrainer, example_data, clip=None, start_unet=1, end_unet=None, condition_on_text_encodings=False, cond_scale=1.0, device=None, text_prepend="", match_image_size=True):
     """
     Takes example data and generates images from the embeddings
     Returns three lists: real images, generated images, and captions
@@ -212,7 +215,7 @@ def generate_samples(trainer, example_data, clip=None, start_unet=1, end_unet=No
         imgs_tensor = torch.stack(real_images)
         assert clip is not None, "clip is None, but img_embeddings is None"
         imgs_tensor.to(device=device)
-        img_embeddings, img_encoding = clip.embed_image(imgs_tensor)
+        img_embeddings, img_encoding = trainer.embed_image(imgs_tensor)
         sample_params["image_embed"] = img_embeddings
     else:
         # Then we are using precomputed image embeddings
@@ -222,8 +225,8 @@ def generate_samples(trainer, example_data, clip=None, start_unet=1, end_unet=No
         if text_embeddings[0] is None:
             # Generate text embeddings from text
             assert clip is not None, "clip is None, but text_embeddings is None"
-            tokenized_texts = tokenize(txts, truncate=True).to(device=device)
-            text_embed, text_encodings = clip.embed_text(tokenized_texts)
+            tokenized_texts = tokenize(txts).to(device=device)
+            text_embed, text_encodings = trainer.embed_text(tokenized_texts)
             sample_params["text_encodings"] = text_encodings
         else:
             # Then we are using precomputed text embeddings
@@ -374,6 +377,13 @@ def train(
         dataloaders=dataloaders,
         **kwargs
     )
+    
+    clip_path = './logs/2024_07_19-11_27_30-model_ViT-L-14-lr_5e-06-b_100-j_4-p_amp/checkpoints/ViT-L-14.pt'
+    clip_name = "ViT-L-14"
+    
+    trainer.load(path="pretrained_models/decoder_v1.0.2.pth", only_model=True, strict=False)
+    trainer.load(path="pretrained_models/upsampler/veldrovive/latest.pth", only_model=True, strict=False, model_arg=False)
+    trainer.load_clip(clip_name, clip_path)
 
     # Set up starting model and parameters based on a recalled state dict
     start_epoch = 0
@@ -422,7 +432,8 @@ def train(
                 sample += total_samples
                 samples_seen += total_samples
                 img_emb = emb.get('img')
-                has_img_embedding = img_emb is not None
+                # has_img_embedding = img_emb is not None
+                has_img_embedding = False
                 if has_img_embedding:
                     img_emb, = send_to_device((img_emb,))
                 text_emb = emb.get('text')
@@ -430,7 +441,7 @@ def train(
                 if has_text_embedding:
                     text_emb, = send_to_device((text_emb,))
                 img, = send_to_device((img,))
-
+                
                 trainer.train()
                 for unet in range(1, trainer.num_unets+1):
                     # Check if this is a unet we are training
@@ -443,7 +454,7 @@ def train(
                     else:
                         # Forward pass automatically generates embedding
                         assert clip is not None
-                        img_embed, img_encoding = clip.embed_image(img)
+                        img_embed, img_encoding = trainer.embed_image(img)
                         forward_params['image_embed'] = img_embed
                     if condition_on_text_encodings:
                         if has_text_embedding:
@@ -451,9 +462,9 @@ def train(
                         else:
                             # Then we need to pass the text instead
                             assert clip is not None
-                            tokenized_texts = tokenize(txt, truncate=True).to(inference_device)
+                            tokenized_texts = tokenize(txt).to(inference_device)
                             assert tokenized_texts.shape[0] == len(img), f"The number of texts ({tokenized_texts.shape[0]}) should be the same as the number of images ({len(img)})"
-                            text_embed, text_encodings = clip.embed_text(tokenized_texts)
+                            text_embed, text_encodings = trainer.embed_text(tokenized_texts)
                             forward_params['text_encodings'] = text_encodings
                     loss = trainer.forward(img, **forward_params, unet_number=unet, _device=inference_device)
                     trainer.update(unet_number=unet)
@@ -538,7 +549,7 @@ def train(
                     else:
                         # Forward pass automatically generates embedding
                         assert clip is not None
-                        img_embed, img_encoding = clip.embed_image(img)
+                        img_embed, img_encoding = trainer.embed_image(img)
                         forward_params['image_embed'] = img_embed
                     if condition_on_text_encodings:
                         if has_text_embedding:
@@ -546,9 +557,9 @@ def train(
                         else:
                             # Then we need to pass the text instead
                             assert clip is not None
-                            tokenized_texts = tokenize(txt, truncate=True).to(device=inference_device)
+                            tokenized_texts = tokenize(txt).to(device=inference_device)
                             assert tokenized_texts.shape[0] == len(img), f"The number of texts ({tokenized_texts.shape[0]}) should be the same as the number of images ({len(img)})"
-                            text_embed, text_encodings = clip.embed_text(tokenized_texts)
+                            text_embed, text_encodings = trainer.embed_text(tokenized_texts)
                             forward_params['text_encodings'] = text_encodings
                     loss = trainer.forward(img.float(), **forward_params, unet_number=unet, _device=inference_device)
                     average_val_loss_tensor[0, unet-1] += loss
@@ -657,7 +668,7 @@ def initialize_training(config: TrainDecoderConfig, config_path):
     )
 
     # If clip is in the model, we need to remove it for compatibility with deepspeed
-    clip = None
+    clip = "place holder because clip is loaded later"
     # SAM MODIFS
     # if config.decoder.clip is not None:
     #     clip = config.decoder.clip.create()  # Of course we keep it to use it during training, just not in the decoder as that causes issues
@@ -665,15 +676,15 @@ def initialize_training(config: TrainDecoderConfig, config_path):
     # # Create the decoder model and print basic info
     # decoder = config.decoder.create()
     
-    clip = OpenAIClipAdapter(model_name, model_path, is_open_clip=True) 
+    # clip = OpenAIClipAdapter(model_name, model_path, is_open_clip=True) 
     decoder_config = TrainDecoderConfig.from_json_path("pretrained_models/decoder_v1.0.2_upsampler_config.json").decoder
     decoder = decoder_config.create()
-    decoder.clip = None
-    decoder_unet_0_state = torch.load("pretrained_models/decoder_v1.0.2.pth")["model"]
-    decoder_unet_1_state = torch.load("pretrained_models/upsampler/veldrovive/latest.pth")
+    # decoder.clip = None
+    # decoder_unet_0_state = torch.load("pretrained_models/decoder_v1.0.2.pth")["model"]
+    # decoder_unet_1_state = torch.load("pretrained_models/upsampler/veldrovive/latest.pth")
     # decoder_unet_2_state = torch.load("pretrained_models/upsampler/v1.0.2/latest.pth")["model"]
-    decoder.load_state_dict(decoder_unet_0_state, strict=False)
-    decoder.load_state_dict(decoder_unet_1_state, strict=False)
+    # decoder.load_state_dict(decoder_unet_0_state, strict=False)
+    # decoder.load_state_dict(decoder_unet_1_state, strict=False)
     # decoder.load_state_dict(decoder_unet_2_state, strict=False)
     
     get_num_parameters = lambda model, only_training=False: sum(p.numel() for p in model.parameters() if (p.requires_grad or not only_training))
